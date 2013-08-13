@@ -14,7 +14,7 @@
 
 function addJQuery(callback) {
     var script = document.createElement("script");
-    script.setAttribute("src", "//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js");
+    script.setAttribute("src", "//code.jquery.com/jquery-1.10.2.min.js");
     script.addEventListener('load', function() {
     var script = document.createElement("script");
     script.textContent = "window.jQ=jQuery.noConflict(true);(" + callback.toString() + ")();";
