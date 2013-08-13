@@ -1,4 +1,5 @@
 // ==UserScript==
+// @id            bulk-like-xiaonei@phoeagon
 // @name          Bulk Like on Xiaonei
 // @namespace     http://about.me/phoeagon
 // @description   Bulk like every item on your timeline

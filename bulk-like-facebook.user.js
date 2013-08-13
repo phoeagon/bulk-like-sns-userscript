@@ -1,4 +1,5 @@
 // ==UserScript==
+// @id            bulk-like-facebook@phoeagon
 // @name          Bulk Like on Facebook
 // @namespace     http://about.me/phoeagon
 // @description   Bulk like every item on your timeline
