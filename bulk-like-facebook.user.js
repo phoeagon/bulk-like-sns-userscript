@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name          Bulk Like on Xiaonei
+// @name          Bulk Like on Facebook
 // @namespace     http://about.me/phoeagon
 // @description   Bulk like every item on your timeline
 // @include       *://*.facebook.com/*
