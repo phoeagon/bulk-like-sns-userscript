@@ -7,6 +7,8 @@
 // @include       *://renren.com/*
 // @include       *://renren.com/
 // @exclude       *://*.renren.com/ajaxproxy.html*
+// @updateURL   https://github.com/phoeagon/bulk-like-sns-userscript/raw/master/bulk-like-xiaonei.user.js
+// @downloadURL   https://github.com/phoeagon/bulk-like-sns-userscript/raw/master/bulk-like-xiaonei.user.js
 // ==/UserScript==
 
 function addJQuery(callback) {
