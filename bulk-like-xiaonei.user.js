@@ -11,7 +11,10 @@
 // @downloadURL   https://github.com/phoeagon/bulk-like-sns-userscript/raw/master/bulk-like-xiaonei.user.js
 // ==/UserScript==
 
-
+/*
+ *  phoeagon
+ *      http://about.me/phoeagon
+ * */
 function addJQuery(callback) {
     var script = document.createElement("script");
     script.setAttribute("src", "//code.jquery.com/jquery-1.10.2.min.js");
