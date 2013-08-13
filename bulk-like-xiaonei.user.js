@@ -11,6 +11,7 @@
 // @downloadURL   https://github.com/phoeagon/bulk-like-sns-userscript/raw/master/bulk-like-xiaonei.user.js
 // ==/UserScript==
 
+
 function addJQuery(callback) {
     var script = document.createElement("script");
     script.setAttribute("src", "//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js");
@@ -30,6 +31,7 @@ function callback() {
             jQ('<div>').addClass('menu').append(
                 jQ('<div>').addClass('menu-title').append(
                     jQ('<a>').attr('href','#').click(function(){
+                            alert("Bulk-like-xiaonei,\tby phoeagon\n2013, Aug 13七姐誕版\n點讚過程已開始")
                             jQ('.ilike_icon').each( function ( ind , ele ){
                                 if ( jQ(ele).html().indexOf("取消")==-1 ){
                                     setTimeout( function(){
@@ -43,4 +45,8 @@ function callback() {
        ))
 
 }
-
+//------------------------------------------------------------------
+/*
+ * Changelog:
+ *  2013 Aug 13 Initial Deployable
+ * */
