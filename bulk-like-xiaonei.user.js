@@ -29,24 +29,49 @@ function addJQuery(callback) {
 
 addJQuery(callback)
 
+
+
 function callback() {
+    setQueryConfig = function (queryConfig){ 
+	var _str = ""; 
+	for(var o in queryConfig){ 
+	if(queryConfig[o] != -1){ 
+	    _str += o + "=" + queryConfig[o] + "&"; 
+	    } 
+	} 
+	var _str = _str.substring(0, _str.length-1); 
+	return encodeURI(_str); 
+    } 
     if (!window)return;
      //       alert("fuck")
       //  console.log( " JQUERY loaded" )
       if (jQ('html').hasClass('nx-main760')){
+	  jQ('body').append(
+	    jQ('<iframe>').addClass('myproxy').css('display','none')
+	  )
 		  jQ('.app-nav-list').append(
 			jQ('<li>').addClass('app-nav-item').attr('data-tip','點讚')
 			.append(
 				jQ('<a>').attr('href','#').css('font-size','200%').html('點讚').click( function (){
                             alert("Bulk-like-xiaonei,\tby phoeagon\n2014, Apr 24GRE前作死版\n點讚過程已開始")
-                            jQ('.like').each( function ( ind , ele ){
+                            jQ('.feed-btn.like').each( function ( ind , ele ){
 								try{
                                 if (! jQ(ele).hasClass('liked') ){
                                     setTimeout( function(){
-										console.log(ele)
-                                        jQ(ele)[0].mouseover();
-                                        jQ(ele)[0].click();
-                                        console.log(ind);
+					//console.log(ele)
+                                        var data = JSON.parse(jQ(ele).attr('data-like'));
+					delete data.othfirst;
+					delete data.othsecond;
+					delete data.oththird;
+					delete data.othforth;
+					//http://blog.csdn.net/longshen747/article/details/17374535
+					data.requestToken = nx.user.requestToken;
+					data._rtk = nx.user._rtk
+					data.gid = data.stype+'_'+data.sourceId;
+					//console.log(data);
+					console.log(setQueryConfig(data));
+					jQ('.myproxy').attr('src','http://like.renren.com/addlike?'+setQueryConfig(data));
+
                                     }  , ind*2000 );
                                 }
 								}catch(err){
