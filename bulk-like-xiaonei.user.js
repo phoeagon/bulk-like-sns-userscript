@@ -33,7 +33,7 @@ function delay(){
         addJQuery(callback);
    	else setTimeout( delay , 1000 );
 }
-if (document.getElementsByTagName('html')[0].getAttribute('class').indexOf('nx-main')!=0){
+if ((document.getElementsByTagName('html')[0].getAttribute('class') || "" ).indexOf('nx-main')!=0){
         //not new, load directly
         addJQuery( callback );
     }  
