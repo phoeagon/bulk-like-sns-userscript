@@ -7,7 +7,8 @@
 // @include       *://*.renren.com/
 // @include       *://renren.com/*
 // @include       *://renren.com/
-// @exclude       *://*.renren.com/ajaxproxy.html*
+// @exclude       *://*.renren.com/ajaxproxy.htm*
+// @exclude       *://webpager.renren.com/api/*.jsp 
 // @updateURL   https://github.com/phoeagon/bulk-like-sns-userscript/raw/master/bulk-like-xiaonei.user.js
 // @downloadURL   https://github.com/phoeagon/bulk-like-sns-userscript/raw/master/bulk-like-xiaonei.user.js
 // @grant none
@@ -33,6 +34,7 @@ function delay(){
         addJQuery(callback);
    	else setTimeout( delay , 1000 );
 }
+console.log(document.location.href)
 if ((document.getElementsByTagName('html')[0].getAttribute('class') || "" ).indexOf('nx-main')!=0){
         //not new, load directly
         addJQuery( callback );
