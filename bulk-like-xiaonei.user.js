@@ -45,14 +45,14 @@ function callback() {
     if (!window)return;
      //       alert("fuck")
       //  console.log( " JQUERY loaded" )
-      if (jQ('html').hasClass('nx-main760')){
+      if (jQ('html').attr('class').indexOf('nx-main')==0){
 	  jQ('body').append(
 	    jQ('<iframe>').addClass('myproxy').css('display','none')
 	  )
-		  jQ('.app-nav-list').append(
-			jQ('<li>').addClass('app-nav-item').attr('data-tip','點讚')
+		  jQ('.fd-nav-list').append(
+			jQ('<li>').addClass('fd-nav-item').attr('data-tip','點讚')
 			.append(
-				jQ('<a>').attr('href','#').css('font-size','200%').html('點讚').click( function (){
+				jQ('<a>').attr('href','#').css('font-size','150%').html('點讚').click( function (){
                             alert("Bulk-like-xiaonei,\tby phoeagon\n2014, Apr 24GRE前作死版\n點讚過程已開始")
                             jQ('.feed-btn.like').each( function ( ind , ele ){
 								try{
