@@ -54,22 +54,36 @@ function callback() {
 			.append(
 				jQ('<a>').attr('href','#').css('font-size','150%').html('點讚').click( function (){
                             alert("Bulk-like-xiaonei,\tby phoeagon\n2014, Apr 24GRE前作死版\n點讚過程已開始")
-                            jQ('.feed-btn.like').each( function ( ind , ele ){
+                            jQ('.feed-btn.like,.ilike-button').each( function ( ind , ele ){
 								try{
                                 if (! jQ(ele).hasClass('liked') ){
                                     setTimeout( function(){
+                                    jQ(ele).toggleClass('liked');
 					//console.log(ele)
-                                        var data = JSON.parse(jQ(ele).attr('data-like'));
+					var data = eval("("+( jQ(ele).attr('data-ilike') || jQ(ele).attr('data-like') )+")");
 					delete data.othfirst;
 					delete data.othsecond;
 					delete data.oththird;
 					delete data.othforth;
+					data.name = data.name || data.mname;
+					data.uid = data.uid || data.mid ;
+					data.style = data.stype ||  data.type ;
+					data.sourceId = data.sourceId || data.id ;
+					delete data.id;
+					delete data.type;
+					delete data.mname;
+					delete data.mid;
 					//http://blog.csdn.net/longshen747/article/details/17374535
 					data.requestToken = nx.user.requestToken;
 					data._rtk = nx.user._rtk
-					data.gid = data.stype+'_'+data.sourceId;
+					//{type: "share", id: 17225243983, owner: 274231940, mid: myid, mname: "xx"} 
+					//{"stype":"share","sourceId":"17228424514","owner":"547286422","uid":"myid","name":"xx","othfirst":"","othsecond":"","oththird":"","othforth":""}"
+					data.gid = jQ(ele).attr('data-ilikeid') || ( data.stype+'_'+data.sourceId );
 					//console.log(data);
 					console.log(setQueryConfig(data));
+					// http://like.renren.com/addlike?stype=share&sourceId=17228385612&owner=262896918&uid=282089378&name=myname&requestToken=requestTk&_rtk=_rtk&gid=share_17228385612
+					//image: http://like.renren.com/addlike?gid=photo_7799453860&name=myname&owner=274231940&uid=myid&type=2&t=1399303954201
+					//share: http://like.renren.com/addlike?gid=share_17207978143&name=myname&owner=274231940&uid=myid&type=3&t=1399304359378
 					jQ('.myproxy').attr('src','http://like.renren.com/addlike?'+setQueryConfig(data));
 
                                     }  , ind*2000 );
