@@ -10,6 +10,7 @@
 // @exclude       *://*.renren.com/ajaxproxy.html*
 // @updateURL   https://github.com/phoeagon/bulk-like-sns-userscript/raw/master/bulk-like-xiaonei.user.js
 // @downloadURL   https://github.com/phoeagon/bulk-like-sns-userscript/raw/master/bulk-like-xiaonei.user.js
+// @grant none
 // ==/UserScript==
 
 /*
@@ -27,12 +28,21 @@ function addJQuery(callback) {
     document.body.appendChild(script);
 }
 
-addJQuery(callback)
-
-
+function delay(){          
+    if (document.getElementsByClassName('piece_msg').length > 0 )
+        addJQuery(callback);
+   	else setTimeout( delay , 1000 );
+}
+if (document.getElementsByTagName('html')[0].getAttribute('class').indexOf('nx-main')!=0){
+        //not new, load directly
+        addJQuery( callback );
+    }  
+else
+    delay(); //V7: wait till fully loaded
 
 function callback() {
-    setQueryConfig = function (queryConfig){ 
+    console.log("callback1");
+    var setQueryConfig = function (queryConfig){ 
 	var _str = ""; 
 	for(var o in queryConfig){ 
 	if(queryConfig[o] != -1){ 
@@ -45,7 +55,7 @@ function callback() {
     if (!window)return;
      //       alert("fuck")
       //  console.log( " JQUERY loaded" )
-      if (jQ('html').attr('class').indexOf('nx-main')==0){
+      if (jQ('html').attr('class') && jQ('html').attr('class').indexOf('nx-main')==0){
 	  jQ('body').append(
 	    jQ('<iframe>').addClass('myproxy').css('display','none')
 	  )
@@ -59,32 +69,32 @@ function callback() {
                                 if (! jQ(ele).hasClass('liked') ){
                                     setTimeout( function(){
                                     jQ(ele).toggleClass('liked');
-					//console.log(ele)
-					var data = eval("("+( jQ(ele).attr('data-ilike') || jQ(ele).attr('data-like') )+")");
-					delete data.othfirst;
-					delete data.othsecond;
-					delete data.oththird;
-					delete data.othforth;
-					data.name = data.name || data.mname;
-					data.uid = data.uid || data.mid ;
-					data.style = data.stype ||  data.type ;
-					data.sourceId = data.sourceId || data.id ;
-					delete data.id;
-					delete data.type;
-					delete data.mname;
-					delete data.mid;
-					//http://blog.csdn.net/longshen747/article/details/17374535
-					data.requestToken = nx.user.requestToken;
-					data._rtk = nx.user._rtk
-					//{type: "share", id: 17225243983, owner: 274231940, mid: myid, mname: "xx"} 
-					//{"stype":"share","sourceId":"17228424514","owner":"547286422","uid":"myid","name":"xx","othfirst":"","othsecond":"","oththird":"","othforth":""}"
-					data.gid = jQ(ele).attr('data-ilikeid') || ( data.stype+'_'+data.sourceId );
-					//console.log(data);
-					console.log(setQueryConfig(data));
-					// http://like.renren.com/addlike?stype=share&sourceId=17228385612&owner=262896918&uid=282089378&name=myname&requestToken=requestTk&_rtk=_rtk&gid=share_17228385612
-					//image: http://like.renren.com/addlike?gid=photo_7799453860&name=myname&owner=274231940&uid=myid&type=2&t=1399303954201
-					//share: http://like.renren.com/addlike?gid=share_17207978143&name=myname&owner=274231940&uid=myid&type=3&t=1399304359378
-					jQ('.myproxy').attr('src','http://like.renren.com/addlike?'+setQueryConfig(data));
+                                    //console.log(ele)
+                                    var data = eval("("+( jQ(ele).attr('data-ilike') || jQ(ele).attr('data-like') )+")");
+                                    delete data.othfirst;
+                                    delete data.othsecond;
+                                    delete data.oththird;
+                                    delete data.othforth;
+                                    data.name = data.name || data.mname;
+                                    data.uid = data.uid || data.mid ;
+                                    data.style = data.stype ||  data.type ;
+                                    data.sourceId = data.sourceId || data.id ;
+                                    delete data.id;
+                                    delete data.type;
+                                    delete data.mname;
+                                    delete data.mid;
+                                    //http://blog.csdn.net/longshen747/article/details/17374535
+                                    data.requestToken = nx.user.requestToken;
+                                    data._rtk = nx.user._rtk
+                                    //{type: "share", id: 17225243983, owner: 274231940, mid: myid, mname: "xx"} 
+                                    //{"stype":"share","sourceId":"17228424514","owner":"547286422","uid":"myid","name":"xx","othfirst":"","othsecond":"","oththird":"","othforth":""}"
+                                    data.gid = jQ(ele).attr('data-ilikeid') || ( data.stype+'_'+data.sourceId );
+                                    //console.log(data);
+                                    console.log(setQueryConfig(data));
+                                    // http://like.renren.com/addlike?stype=share&sourceId=17228385612&owner=262896918&uid=282089378&name=myname&requestToken=requestTk&_rtk=_rtk&gid=share_17228385612
+                                    //image: http://like.renren.com/addlike?gid=photo_7799453860&name=myname&owner=274231940&uid=myid&type=2&t=1399303954201
+                                    //share: http://like.renren.com/addlike?gid=share_17207978143&name=myname&owner=274231940&uid=myid&type=3&t=1399304359378
+                                    jQ('.myproxy').attr('src','http://like.renren.com/addlike?'+setQueryConfig(data));
 
                                     }  , ind*2000 );
                                 }
